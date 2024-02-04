@@ -6,10 +6,13 @@ import com.PawMates.business.pet.requests.UpdatePetRequest;
 import com.PawMates.business.pet.responses.GetAllPetTypesResponse;
 import com.PawMates.business.pet.responses.GetByIdPetResponse;
 import com.PawMates.business.petType.requests.UpdatePetTypeRequest;
+import com.PawMates.business.rules.PetBusinessRules;
+import com.PawMates.business.rules.PetTypeBusinessRules;
 import com.PawMates.core.utilities.mappers.ModelMapperService;
 import com.PawMates.dataAccess.abstracts.PetTypeRepository;
 import com.PawMates.entities.concretes.Pet;
 import com.PawMates.entities.concretes.PetType;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +20,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PetTypeManager implements PetTypeService {
-
+    private PetTypeBusinessRules petTypeBusinessRules;
     private final PetTypeRepository petTypeRepository;
     private final ModelMapperService modelMapperService;
 
@@ -40,12 +43,14 @@ public class PetTypeManager implements PetTypeService {
 
     @Override
     public void add(CreatePetTypeRequest request) {
+        petTypeBusinessRules.checkIfPetTypeNameExists(request.getName());
         PetType petType = modelMapperService.forRequest().map(request, PetType.class);
         petTypeRepository.save(petType);
     }
 
     @Override
     public void update(UpdatePetTypeRequest updatePetTypeRequest) {
+        petTypeBusinessRules.checkIfPetTypeNameExists(updatePetTypeRequest.getName());
         PetType pet = modelMapperService.forRequest().map(updatePetTypeRequest, PetType.class);
         petTypeRepository.save(pet); // Mevcut pet'in üzerine yazılması gerekiyor, bu yüzden güncellenmeden önce varlığın kontrolü yapılabilir.
     }

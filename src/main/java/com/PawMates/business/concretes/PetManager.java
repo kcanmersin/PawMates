@@ -5,9 +5,11 @@ import com.PawMates.business.pet.requests.CreatePetRequest;
 import com.PawMates.business.pet.requests.UpdatePetRequest;
 import com.PawMates.business.pet.responses.GetAllPetsResponse;
 import com.PawMates.business.pet.responses.GetByIdPetResponse;
+import com.PawMates.business.rules.PetBusinessRules;
 import com.PawMates.core.utilities.mappers.ModelMapperService;
 import com.PawMates.dataAccess.abstracts.PetRepository;
 import com.PawMates.entities.concretes.Pet;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PetManager implements PetService {
-    private final PetRepository petRepository;
-    private final ModelMapperService modelMapperService;
+    private  PetRepository petRepository;
+    private PetBusinessRules petBusinessRules;
+    private  ModelMapperService modelMapperService;
 
     @Override
     public List<GetAllPetsResponse> getAll() {
@@ -37,6 +40,12 @@ public class PetManager implements PetService {
 
     @Override
     public void add(CreatePetRequest createPetRequest) {
+        // Check if the pet name already exists
+        //petBusinessRules.checkIfPetNameExists(createPetRequest.getName());
+
+        // Check if the referenced pet type exists
+        petBusinessRules.checkIfPetTypeExists(createPetRequest.getTypeId());
+
         Pet pet = modelMapperService.forRequest().map(createPetRequest, Pet.class);
         petRepository.save(pet);
     }

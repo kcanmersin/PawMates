@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class PetTypeBusinessRules {
     private final PetTypeRepository petRepository;
 
-    public void checkIfPetNameExists(String name) {
+    public void checkIfPetTypeNameExists(String name) {
         if(petRepository.existsByName(name)) {
             throw new BusinessException("Pet Type name already exists");
         }
