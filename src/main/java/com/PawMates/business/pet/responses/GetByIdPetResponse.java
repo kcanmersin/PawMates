@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 public class GetByIdPetResponse {
     private Long id;
     private String name;
-    private String type; // Köpek, kedi vb.
+    private Long typeId; // To include the pet's type ID
+    private String typeName; // Köpek, kedi vb.
     private String breed; // Irk
     private String age;
 //    private String location; // Sahiplendirme veya kayıp ilanı için konum

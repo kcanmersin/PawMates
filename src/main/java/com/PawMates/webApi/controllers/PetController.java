@@ -35,8 +35,8 @@ public class PetController {
         petService.add(createPetRequest);
     }
 
-    @PutMapping("/{id}")
-    public void update(@PathVariable Long id, @RequestBody @Valid UpdatePetRequest updatePetRequest) {
+    @PutMapping()
+    public void update( @RequestBody @Valid UpdatePetRequest updatePetRequest) {
         // Ensure the ID is consistent across the path variable and request body
 //        if (!id.equals(updatePetRequest.getId())) {
 //            throw new IllegalArgumentException("ID in the path and request body must match");

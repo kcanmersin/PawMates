@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 public class GetAllPetsResponse {
     private Long id;
     private String name;
-    private String type; // Köpek, kedi vb.
-    private String breed; // Irk
+    private Long typeId; // To include the pet's type ID
+    private String typeName; // Changed to display the type name
+    private String breed;
     private String age;
-//    private String location; // Sahiplendirme veya kayıp ilanı için konum
-    private String gender; // Cinsiyet
+    private String gender; // Remains a String, but will be 'M' or 'F'
 }
