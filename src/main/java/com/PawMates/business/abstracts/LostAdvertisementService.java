@@ -1,2 +1,4 @@
-package com.PawMates.business.abstracts;public interface LostAdvertisementService {
+package com.PawMates.business.abstracts;
+
+public interface LostAdvertisementService extends  AdvertisementService{
 }

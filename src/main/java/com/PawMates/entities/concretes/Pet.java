@@ -35,4 +35,9 @@ public class Pet {
 
     @Column(name = "gender") // Cinsiyet
     private String gender;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "advertisement_id")
+    private Advertisement advertisement;
 }

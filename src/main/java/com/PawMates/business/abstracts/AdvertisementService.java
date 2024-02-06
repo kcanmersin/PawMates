@@ -1,15 +1,11 @@
 package com.PawMates.business.abstracts;
 
-import com.PawMates.business.advertisement.requests.CreateAdvertisementRequest;
-import com.PawMates.business.advertisement.requests.UpdateAdvertisementRequest;
-import com.PawMates.business.advertisement.responses.AdvertisementResponse;
-
 import java.util.List;
 
-public interface AdvertisementService {
-    List<AdvertisementResponse> getAll();
-    AdvertisementResponse getById(Long id);
-    void add(CreateAdvertisementRequest createAdvertisementRequest);
-    void update(UpdateAdvertisementRequest updateAdvertisementRequest);
+public interface AdvertisementService<T, R, C, U> {
+    List<R> getAll();
+    R getById(Long id);
+    R add(C createRequest);
+    R update(U updateRequest);
     void delete(Long id);
 }

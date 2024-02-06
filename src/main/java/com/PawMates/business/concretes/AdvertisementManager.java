@@ -1,6 +1,7 @@
 package com.PawMates.business.concretes;
 
 import com.PawMates.business.abstracts.AdvertisementService;
+import com.PawMates.business.abstracts.GenericAdvertisementService;
 import com.PawMates.business.advertisement.requests.CreateAdvertisementRequest;
 import com.PawMates.business.advertisement.requests.UpdateAdvertisementRequest;
 import com.PawMates.business.advertisement.responses.AdvertisementResponse;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class AdvertisementManager implements AdvertisementService {
+public class AdvertisementManager implements GenericAdvertisementService<AdvertisementResponse, Long> {
     private final AdvertisementRepository advertisementRepository;
     private final ModelMapperService modelMapperService;
 
