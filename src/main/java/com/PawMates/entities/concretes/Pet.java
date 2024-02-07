@@ -20,24 +20,20 @@ public class Pet {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Establishing the Many-To-One relationship
-    @JoinColumn(name = "pet_type_id") // This column will hold the foreign key to PetType
-    private PetType type; // Changing from String type to PetType
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pet_type_id")
+    private PetType type;
 
-    @Column(name = "breed") // Irk
+    @Column(name = "breed")
     private String breed;
 
     @Column(name = "age")
     private String age;
 
-    // @Column(name="location") // Commented out for brevity
-    // private String location;
-
-    @Column(name = "gender") // Cinsiyet
+    @Column(name = "gender")
     private String gender;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "advertisement_id")
-    private Advertisement advertisement;
+    @JoinColumn(name = "advertisement_id") // Bu sütun Pet ile Advertisement arasındaki ilişkiyi belirtir
+    private Advertisement advertisement; // Bu Pet'in ait olduğu İlan
 }

@@ -4,23 +4,19 @@ import com.PawMates.business.abstracts.JobAdvertisementService;
 import com.PawMates.business.advertisement.requests.CreateJobAdvertisementRequest;
 import com.PawMates.business.advertisement.requests.UpdateJobAdvertisementRequest;
 import com.PawMates.business.advertisement.responses.JobAdvertisementResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/jobAdvertisements")
+@RequiredArgsConstructor
 public class JobAdvertisementController {
 
     private final JobAdvertisementService jobAdvertisementService;
-
-    @Autowired
-    public JobAdvertisementController(JobAdvertisementService jobAdvertisementService) {
-        this.jobAdvertisementService = jobAdvertisementService;
-    }
 
     @GetMapping()
     public List<JobAdvertisementResponse> getAll() {
@@ -34,15 +30,17 @@ public class JobAdvertisementController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public JobAdvertisementResponse add(@RequestBody @Valid CreateJobAdvertisementRequest request) {
-        return jobAdvertisementService.add(request);
-    }
+    public void add(@RequestBody @Valid CreateJobAdvertisementRequest request) {
+        jobAdvertisementService.add(request);
+}
 
-    @PutMapping("/{id}")
-    public JobAdvertisementResponse update(@PathVariable Long id, @RequestBody @Valid UpdateJobAdvertisementRequest request) {
-        request.setId(id); // Ensure the ID is set correctly
-        return jobAdvertisementService.update(request);
-    }
+@PutMapping()
+public void update(@RequestBody @Valid UpdateJobAdvertisementRequest request) {
+    jobAdvertisementService.update(request);
+}
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+@DeleteMapping("/{id}")
+public void delete(@PathVariable Long id) {
+    jobAdvertisementService.delete(id);
+}
+}

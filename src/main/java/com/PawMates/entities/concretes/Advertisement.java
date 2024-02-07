@@ -26,21 +26,21 @@ public class Advertisement {
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Pet> pets; // Represent multiple pets associated with an advertisement
-
     @Column(name = "phone_number")
-    private String phoneNumber; // İletişim bilgisi olarak telefon numarası
+    private String phoneNumber;
 
     @Column(name = "email")
-    private String email; // İletişim bilgisi olarak email
+    private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address; // Her ilanın bir adresi olabilir
+    private Address address;
+
+    @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Pet> pets; // İlan ile ilişkili evcil hayvanların listesi
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate; // İlanın oluşturulma zamanı
+    private LocalDateTime createdDate;
 
     @PrePersist
     protected void onCreate() {

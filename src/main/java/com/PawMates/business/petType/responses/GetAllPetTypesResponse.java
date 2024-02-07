@@ -1,4 +1,4 @@
-package com.PawMates.business.pet.responses;
+package com.PawMates.business.petType.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

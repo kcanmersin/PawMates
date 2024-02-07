@@ -4,23 +4,19 @@ import com.PawMates.business.abstracts.AdoptionAdvertisementService;
 import com.PawMates.business.advertisement.requests.CreateAdoptionAdvertisementRequest;
 import com.PawMates.business.advertisement.requests.UpdateAdoptionAdvertisementRequest;
 import com.PawMates.business.advertisement.responses.AdoptionAdvertisementResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/adoptionAdvertisements")
+@RequiredArgsConstructor
 public class AdoptionAdvertisementController {
 
     private final AdoptionAdvertisementService adoptionAdvertisementService;
-
-    @Autowired
-    public AdoptionAdvertisementController(AdoptionAdvertisementService adoptionAdvertisementService) {
-        this.adoptionAdvertisementService = adoptionAdvertisementService;
-    }
 
     @GetMapping()
     public List<AdoptionAdvertisementResponse> getAll() {
@@ -34,14 +30,13 @@ public class AdoptionAdvertisementController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public AdoptionAdvertisementResponse add(@RequestBody @Valid CreateAdoptionAdvertisementRequest request) {
-        return adoptionAdvertisementService.add(request);
+    public void add(@RequestBody @Valid CreateAdoptionAdvertisementRequest request) {
+        adoptionAdvertisementService.add(request);
     }
 
-    @PutMapping("/{id}")
-    public AdoptionAdvertisementResponse update( @RequestBody @Valid UpdateAdoptionAdvertisementRequest request) {
-
-        return adoptionAdvertisementService.update(request);
+    @PutMapping()
+    public void update(@RequestBody @Valid UpdateAdoptionAdvertisementRequest request) {
+        adoptionAdvertisementService.update(request);
     }
 
     @DeleteMapping("/{id}")
