@@ -36,8 +36,6 @@ public class Advertisement {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Pet> pets; // İlan ile ilişkili evcil hayvanların listesi
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
@@ -46,4 +44,10 @@ public class Advertisement {
     protected void onCreate() {
         this.createdDate = LocalDateTime.now();
     }
+
+
+    @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    //private List<Pet> pets; // İlan ile ilişkili evcil hayvanların listesi
+    private List<Pet> pets; // İlan ile ilişkili evcil hayvanların listesi
+
 }

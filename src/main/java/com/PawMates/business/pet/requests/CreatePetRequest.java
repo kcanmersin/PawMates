@@ -1,22 +1,24 @@
 package com.PawMates.business.pet.requests;
 
+import com.PawMates.entities.concretes.PetType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+@Getter
+@Setter
 public class CreatePetRequest {
     @NotBlank(message = "Name cannot be blank")
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
-    @NotNull(message = "Pet type ID cannot be null")
+    //@NotNull(message = "Pet type ID cannot be null")
     private Long typeId; // Changed to reference PetType by ID
 
     @NotBlank(message = "Breed cannot be blank")
@@ -29,4 +31,7 @@ public class CreatePetRequest {
     @NotBlank(message = "Gender cannot be blank")
     @Size(min = 1, max = 1, message = "Gender must be 'M' or 'F'")
     private String gender;
+
+    private Long advertisementId; // Removed advertisement ID from pet creation
+
 }

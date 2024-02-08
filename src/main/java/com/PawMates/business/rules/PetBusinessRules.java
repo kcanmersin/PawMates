@@ -12,11 +12,11 @@ public class PetBusinessRules {
     private final PetRepository petRepository;
     private final PetTypeRepository petTypeRepository;
 
-    public void checkIfPetNameExists(String name) {
-        if (petRepository.existsByName(name)) {
-            throw new BusinessException("Pet name already exists");
-        }
-    }
+//    public void checkIfPetNameExists(String name) {
+//        if (petRepository.existsByName(name)) {
+//            throw new BusinessException("Pet name already exists");
+//        }
+//    }
 
     public void checkIfPetTypeExists(Long typeId) {
         if (!petTypeRepository.existsById(typeId)) {

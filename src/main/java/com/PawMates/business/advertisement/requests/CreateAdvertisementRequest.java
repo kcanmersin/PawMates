@@ -19,4 +19,5 @@ public class CreateAdvertisementRequest {
     private Long addressId; // Related address ID
    // private CreateAddressRequest address; // Include address in advertisement creation
     private List<CreatePetRequest> pets; // Include pets in advertisement creation
+    //private List<CreatePetRequest> pets; // Include pets in advertisement creation
 }

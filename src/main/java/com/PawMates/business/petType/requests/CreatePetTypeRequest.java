@@ -1,4 +1,4 @@
-package com.PawMates.business.pet.requests;
+package com.PawMates.business.petType.requests;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

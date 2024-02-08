@@ -15,4 +15,5 @@ public class GetAllPetsResponse {
     private String breed;
     private String age;
     private String gender; // Remains a String, but will be 'M' or 'F'
+    private Long advertisementId;
 }

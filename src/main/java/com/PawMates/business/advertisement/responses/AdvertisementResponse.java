@@ -20,6 +20,6 @@ public class AdvertisementResponse {
     private String email;
     private Long addressId; // İlanın ilişkilendirildiği adresin ID'si
     private AddressResponse address;
-    private List<GetAllPetsResponse> pets; // İlanın ilişkilendirildiği petlerin listesi
+    private List<GetAllPetsResponse> pets;
     private LocalDateTime createdDate;
 }

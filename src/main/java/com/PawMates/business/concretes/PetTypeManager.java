@@ -1,9 +1,8 @@
 package com.PawMates.business.concretes;
 
 import com.PawMates.business.abstracts.PetTypeService;
-import com.PawMates.business.pet.requests.CreatePetTypeRequest;
-import com.PawMates.business.pet.requests.UpdatePetRequest;
 import com.PawMates.business.pet.responses.GetByIdPetResponse;
+import com.PawMates.business.petType.requests.CreatePetTypeRequest;
 import com.PawMates.business.petType.requests.UpdatePetTypeRequest;
 import com.PawMates.business.petType.responses.GetAllPetTypesResponse;
 import com.PawMates.business.rules.PetBusinessRules;
