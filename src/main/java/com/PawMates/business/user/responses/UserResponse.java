@@ -14,6 +14,6 @@ public class UserResponse {
     private String email;
     private String firstName;
     private String lastName;
-    
+
     // Additional fields like firstName, lastName etc. can be included as needed
 }
