@@ -8,7 +8,7 @@ import com.PawMates.business.user.responses.UserResponse;
 import com.PawMates.core.utilities.exceptions.BusinessException;
 import com.PawMates.core.utilities.mappers.ModelMapperService;
 import com.PawMates.dataAccess.abstracts.UserRepository;
-import com.PawMates.entities.concretes.User;
+import com.PawMates.authorization.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
