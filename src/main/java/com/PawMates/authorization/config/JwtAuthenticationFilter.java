@@ -1,6 +1,7 @@
 package com.PawMates.authorization.config;
 
 import com.PawMates.authorization.config.JwtService;
+import com.PawMates.authorization.token.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
