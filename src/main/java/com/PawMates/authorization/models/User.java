@@ -1,5 +1,6 @@
 package com.PawMates.authorization.models;
 
+import com.PawMates.entities.concretes.Comment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -49,6 +50,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
     // Custom constructor for username, email, password, firstName, and lastName
     public User(String username, String email, String password, String firstName, String lastName) {

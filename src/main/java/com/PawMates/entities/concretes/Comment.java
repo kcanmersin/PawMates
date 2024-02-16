@@ -1,7 +1,6 @@
 package com.PawMates.entities.concretes;
 
-package com.PawMates.entities.concretes;
-
+import com.PawMates.authorization.models.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,6 +26,13 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user; // Yorumu yapan kullanıcı
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
+    private Comment parent; // Üst yorum
+
+    @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
+    private Set<Comment> replies = new HashSet<>(); // Alt yorumlar
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "comment_likes",
