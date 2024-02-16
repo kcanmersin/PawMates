@@ -31,6 +31,10 @@ public class Comment {
     @JoinColumn(name = "parent_id")
     private Comment parent; // Üst yorum
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    private Room room; // İlişkili oda
+
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private Set<Comment> replies = new HashSet<>(); // Alt yorumlar
 

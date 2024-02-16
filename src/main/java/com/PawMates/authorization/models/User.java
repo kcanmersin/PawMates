@@ -1,6 +1,7 @@
 package com.PawMates.authorization.models;
 
 import com.PawMates.entities.concretes.Comment;
+import com.PawMates.entities.concretes.Room;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -53,6 +54,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
+
+    @OneToMany(mappedBy = "host", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Room> rooms = new HashSet<>(); // Kullanıcının odaları
 
     // Custom constructor for username, email, password, firstName, and lastName
     public User(String username, String email, String password, String firstName, String lastName) {
