@@ -55,7 +55,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
-    @OneToMany(mappedBy = "host", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Room> rooms = new HashSet<>(); // Kullanıcının odaları
 
     // Custom constructor for username, email, password, firstName, and lastName

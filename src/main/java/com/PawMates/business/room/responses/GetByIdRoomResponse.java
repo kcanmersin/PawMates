@@ -11,6 +11,6 @@ public class GetByIdRoomResponse {
     private Long id;
     private String topic;
     private String description;
-    private Long hostId;
-    private String hostUsername; // Odanın sahibi olan kullanıcının kullanıcı adı
+    private Long userId;
+    private String username; // Odanın sahibi olan kullanıcının kullanıcı adı
 }

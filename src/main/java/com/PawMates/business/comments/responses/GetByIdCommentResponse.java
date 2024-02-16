@@ -13,4 +13,5 @@ public class GetByIdCommentResponse {
     private Long userId;
     private String userName; // Yorumu yapan kullanıcının adı
     private Long parentId; // Eğer alt yorum ise, üst yorumun ID'si
+    private Long roomId; // Yorumun ilişkili olduğu oda
 }

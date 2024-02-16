@@ -9,7 +9,7 @@ import com.PawMates.entities.concretes.Room;
 import java.util.List;
 
 public interface RoomService {
-    Room createRoom(CreateRoomRequest request);
+    void createRoom(CreateRoomRequest request);
     void deleteRoom(Long id);
     Room updateRoom(UpdateRoomRequest request);
     List<GetAllRoomsResponse> getAllRooms();

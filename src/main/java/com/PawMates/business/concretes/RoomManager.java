@@ -5,6 +5,7 @@ import com.PawMates.business.room.requests.CreateRoomRequest;
 import com.PawMates.business.room.requests.UpdateRoomRequest;
 import com.PawMates.business.room.responses.GetAllRoomsResponse;
 import com.PawMates.business.room.responses.GetByIdRoomResponse;
+import com.PawMates.business.rules.RoomRules;
 import com.PawMates.core.utilities.mappers.ModelMapperService;
 import com.PawMates.dataAccess.abstracts.RoomRepository;
 import com.PawMates.entities.concretes.Room;
@@ -21,10 +22,11 @@ public class RoomManager implements RoomService {
     private final ModelMapperService modelMapperService;
 
     @Override
-    public Room createRoom(CreateRoomRequest request) {
+    public void createRoom(CreateRoomRequest request) {
         Room room = modelMapperService.forRequest().map(request, Room.class);
         // Additional business logic or validation can be added here
-        return roomRepository.save(room);
+
+         roomRepository.save(room);
     }
 
     @Override
