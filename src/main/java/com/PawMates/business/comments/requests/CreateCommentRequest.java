@@ -15,4 +15,5 @@ public class CreateCommentRequest {
     private Long userId; // Yorumu yapan kullanıcının ID'si
 
     private Long parentId; // Üst yorumun ID'si, eğer varsa
+    private Long roomId; // İlişkili oda ID'si
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,7 +37,9 @@ public class Comment {
     private Room room; // İlişkili oda
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
-    private Set<Comment> replies = new HashSet<>(); // Alt yorumlar
+    //private Set<Comment> replies = new HashSet<>(); // Alt yorumlar
+    private List<Comment> comments ;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "comment_likes",

@@ -1,6 +1,7 @@
 package com.PawMates.webApi.controllers;
 
 import com.PawMates.business.abstracts.RoomService;
+import com.PawMates.business.comments.responses.CommentsForRoomResponse;
 import com.PawMates.business.room.requests.CreateRoomRequest;
 import com.PawMates.business.room.requests.UpdateRoomRequest;
 import com.PawMates.business.room.responses.GetAllRoomsResponse;
@@ -47,5 +48,9 @@ public class RoomController {
     @DeleteMapping("/{id}")
     public void deleteRoom(@PathVariable Long id) {
         roomService.deleteRoom(id);
+    }
+    @GetMapping("/{roomId}/comments")
+    public List<CommentsForRoomResponse> getCommentsForRoom(@PathVariable Long roomId) {
+        return roomService.getCommentsForRoom(roomId);
     }
 }

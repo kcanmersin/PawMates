@@ -5,6 +5,7 @@ import com.PawMates.business.messages.requests.CreateMessageRequest;
 import com.PawMates.business.messages.requests.UpdateMessageRequest;
 import com.PawMates.business.messages.responses.GetAllMessagesResponse;
 import com.PawMates.business.messages.responses.GetByIdMessageResponse;
+import com.PawMates.business.messages.responses.GetMessagesBetweenUsersResponse;
 import com.PawMates.core.utilities.mappers.ModelMapperService;
 import com.PawMates.dataAccess.abstracts.MessageRepository;
 import com.PawMates.entities.concretes.Message;
@@ -51,9 +52,22 @@ public class MessageManager implements MessageService {
         message.setRead(updateMessageRequest.isRead());
         messageRepository.save(message);
     }
-
     @Override
     public void deleteMessage(Long id) {
         messageRepository.deleteById(id);
     }
+    @Override
+    public List<GetMessagesBetweenUsersResponse> getMessagesBetweenUsers(Long senderId, Long receiverId) {
+        List<Message> messages = messageRepository.findMessagesBetweenUsers(senderId, receiverId);
+        return messages.stream()
+                .map(message -> modelMapperService.forResponse()
+                        .map(message, GetMessagesBetweenUsersResponse.class))
+                .collect(Collectors.toList());
+    }
+    @Override
+    public void markMessagesAsRead(Long senderId, Long receiverId) {
+        messageRepository.markMessagesAsRead(senderId, receiverId);
+    }
+
+
 }

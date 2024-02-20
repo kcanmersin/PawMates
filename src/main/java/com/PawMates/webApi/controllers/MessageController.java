@@ -5,6 +5,7 @@ import com.PawMates.business.messages.requests.CreateMessageRequest;
 import com.PawMates.business.messages.requests.UpdateMessageRequest;
 import com.PawMates.business.messages.responses.GetAllMessagesResponse;
 import com.PawMates.business.messages.responses.GetByIdMessageResponse;
+import com.PawMates.business.messages.responses.GetMessagesBetweenUsersResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -46,4 +47,16 @@ public class MessageController {
     public void deleteMessage(@PathVariable Long id) {
         messageService.deleteMessage(id);
     }
+
+    @GetMapping("/between")
+    public List<GetMessagesBetweenUsersResponse> getMessagesBetweenUsers(@RequestParam Long senderId, @RequestParam Long receiverId) {
+        return messageService.getMessagesBetweenUsers(senderId, receiverId);
+    }
+    @PatchMapping("/markRead")
+    @ResponseStatus(HttpStatus.OK)
+    public void markMessagesAsRead(@RequestParam Long senderId, @RequestParam Long receiverId) {
+        messageService.markMessagesAsRead(senderId, receiverId);
+    }
+
+
 }
