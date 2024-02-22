@@ -7,12 +7,16 @@ import com.PawMates.business.pet.responses.GetAllPetsResponse;
 import com.PawMates.business.pet.responses.GetByIdPetResponse;
 import com.PawMates.business.rules.PetBusinessRules;
 import com.PawMates.core.utilities.mappers.ModelMapperService;
+import com.PawMates.dataAccess.abstracts.PetImageRepository;
 import com.PawMates.dataAccess.abstracts.PetRepository;
 import com.PawMates.entities.concretes.Pet;
+import com.PawMates.entities.concretes.PetImage;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +26,7 @@ public class PetManager implements PetService {
     private  PetRepository petRepository;
     private PetBusinessRules petBusinessRules;
     private  ModelMapperService modelMapperService;
+    private PetImageRepository petImageRepository;
 
     @Override
     public List<GetAllPetsResponse> getAll() {
@@ -46,9 +51,35 @@ public class PetManager implements PetService {
         // Check if the referenced pet type exists
         petBusinessRules.checkIfPetTypeExists(createPetRequest.getTypeId());
 
+        // CreatePetRequest'ten Pet entity'sine dönüşüm
         Pet pet = modelMapperService.forRequest().map(createPetRequest, Pet.class);
-        petRepository.save(pet);
+
+        // Pet entity'sini kaydet
+        Pet savedPet = petRepository.save(pet);
+
+        // Eğer petImages null değilse ve uzunluğu 0'dan büyükse
+        if (createPetRequest.getPetImages() != null && createPetRequest.getPetImages().length > 0) {
+            // Her bir MultipartFile için döngü
+            for (MultipartFile file : createPetRequest.getPetImages()) {
+                // Dosyayı byte[] olarak al
+                byte[] imageBytes;
+                try {
+                    imageBytes = file.getBytes();
+                    // Yeni bir PetImage instance'ı oluştur
+                    PetImage petImage = new PetImage();
+                    petImage.setImage(imageBytes);
+                    petImage.setPet(savedPet); // PetImage'ı kaydedilen pet ile ilişkilendir
+                    // PetImage'ı kaydet
+                    petImageRepository.save(petImage);
+                } catch (IOException e) {
+                    // Resim yüklenirken bir hata oluştu
+                    e.printStackTrace();
+                    // Hata yönetimi için uygun bir işlem yapın
+                }
+            }
+        }
     }
+
 
     @Override
     public void update(UpdatePetRequest updatePetRequest) {

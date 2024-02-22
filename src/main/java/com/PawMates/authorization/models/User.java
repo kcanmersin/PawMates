@@ -58,6 +58,13 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Room> rooms = new HashSet<>(); // Kullanıcının odaları
 
+    @Lob
+    @Column(name = "profile_picture")
+    private byte[] profilePicture;
+
+    @Lob
+    @Column(name = "background_picture")
+    private byte[] backgroundPicture;
     // Custom constructor for username, email, password, firstName, and lastName
     public User(String username, String email, String password, String firstName, String lastName) {
         this.username = username;

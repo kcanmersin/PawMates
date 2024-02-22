@@ -3,6 +3,10 @@ package com.PawMates.entities.concretes;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "pets")
 @Data
@@ -36,4 +40,13 @@ public class Pet {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "advertisement_id") // Bu sütun Pet ile Advertisement arasındaki ilişkiyi belirtir
     private Advertisement advertisement; // Bu Pet'in ait olduğu İlan
+
+//
+//    @Lob
+//    @Column(name = "pet_images")
+//    private byte[] pet_images;
+
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private Set<PetImage> petImages = new HashSet<>();
+    private List<PetImage> petImages ;
 }

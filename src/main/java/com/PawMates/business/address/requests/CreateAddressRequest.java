@@ -1,5 +1,6 @@
 package com.PawMates.business.address.requests;
 
+import com.PawMates.entities.concretes.Location;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,5 @@ public class CreateAddressRequest {
     @Size(min = 5, max = 10, message = "Zip code must be between 5 and 10 characters")
     private String zipCode;
 
-    private Double latitude; // Optional, no validation
-    private Double longitude; // Optional, no validation
+    private Location location; // Optional, no validation
 }

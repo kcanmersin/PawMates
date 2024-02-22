@@ -4,16 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetAllPetsResponse {
     private Long id;
     private String name;
-    private Long typeId; // To include the pet's type ID
-    private String typeName; // Changed to display the type name
+    private Long typeId; // Pet'in tip ID'si
+    private String typeName; // Pet tipinin adı
     private String breed;
     private String age;
-    private String gender; // Remains a String, but will be 'M' or 'F'
+    private String gender; // 'M' veya 'F' olarak kalır
     private Long advertisementId;
+
+    // Pet'in resimlerini içeren Base64 kodlanmış stringlerin listesi
+    private List<String> petImages; // Pet'in tüm resimlerini döndürmek için eklendi
 }

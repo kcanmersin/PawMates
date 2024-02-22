@@ -13,4 +13,6 @@ public class GetUserByIdResponse {
     private String email;
     private String firstName;
     private String lastName;
+    private String profilePicture; // Base64 encoded string
+    private String backgroundPicture; // Base64 encoded string
 }
