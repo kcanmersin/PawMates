@@ -65,21 +65,29 @@ public class PetManager implements PetService {
 //    }
 @Override
 public List<GetAllPetsResponse> getAll() {
-    List<Pet> pets = petRepository.findAll();
-    return pets.stream().map(pet -> {
+//    List<Pet> pets = petRepository.findAll();
+//    return pets.stream().map(pet -> {
+//        GetAllPetsResponse response = modelMapperService.forResponse().map(pet, GetAllPetsResponse.class);
+//        //print response
+//        // Pet'in resimlerini alıp, Base64'e çevir
+//        List<String> encodedImages = new ArrayList<>();
+//        pet.getPetImages().forEach(image -> {
+//            String encodedImage = Base64.getEncoder().encodeToString(image.getImage()); // 'getData()' metodunuzun adı neyse
+//            encodedImages.add(encodedImage);
+//        });
+//
+//        response.setPetImages(encodedImages);
+//        //print response
+//        return response;
+//    }).collect(Collectors.toList());
+    return petRepository.findAll().stream().map(pet -> {
         GetAllPetsResponse response = modelMapperService.forResponse().map(pet, GetAllPetsResponse.class);
-        //print response
         // Pet'in resimlerini alıp, Base64'e çevir
-        List<String> encodedImages = new ArrayList<>();
-        pet.getPetImages().forEach(image -> {
-            String encodedImage = Base64.getEncoder().encodeToString(image.getImage()); // 'getData()' metodunuzun adı neyse
-            encodedImages.add(encodedImage);
-        });
 
-        response.setPetImages(encodedImages);
-        //print response
+
         return response;
-    }).collect(Collectors.toList());}
+    }).collect(Collectors.toList());
+   }
 
     @Override
     public GetByIdPetResponse getById(Long id) {

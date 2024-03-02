@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class CreateAdvertisementRequest {
     private String title;
     private String content;

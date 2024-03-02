@@ -46,7 +46,7 @@ public class Pet {
 //    @Column(name = "pet_images")
 //    private byte[] pet_images;
 
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private Set<PetImage> petImages = new HashSet<>();
-    private List<PetImage> petImages ;
+   @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
+   //private Set<PetImage> petImages = new HashSet<>();
+   private List<PetImage> petImages ;
 }

@@ -30,6 +30,7 @@ public class CreatePetRequest {
     @Size(min = 1, max = 1, message = "Gender must be 'M' or 'F'")
     private String gender;
 
+    private Long advertisementId;
     // MultipartFile tipinde bir veya birden fazla resim ekleyin
    // private MultipartFile[] petImages; // Birden fazla resim desteklemek için MultipartFile dizisi
 //    private List<PetImage> petImages;

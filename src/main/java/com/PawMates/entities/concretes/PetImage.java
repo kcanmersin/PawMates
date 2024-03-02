@@ -18,9 +18,9 @@ public class PetImage {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pet_id")
-    private Pet pet;
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "pet_id")
+   private Pet pet;
 
     @Lob
     @Column(name = "image")
