@@ -31,6 +31,7 @@ public class CreatePetRequest {
     private String gender;
 
     // MultipartFile tipinde bir veya birden fazla resim ekleyin
-    private MultipartFile[] petImages; // Birden fazla resim desteklemek için MultipartFile dizisi
+   // private MultipartFile[] petImages; // Birden fazla resim desteklemek için MultipartFile dizisi
 //    private List<PetImage> petImages;
+    
 }

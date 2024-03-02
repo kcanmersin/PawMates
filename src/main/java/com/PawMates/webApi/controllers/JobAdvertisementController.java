@@ -28,9 +28,9 @@ public class JobAdvertisementController {
         return jobAdvertisementService.getById(id);
     }
 
-    @PostMapping()
+    @PostMapping(consumes = "multipart/form-data")
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@RequestBody @Valid CreateJobAdvertisementRequest request) {
+    public void add(@ModelAttribute @Valid CreateJobAdvertisementRequest request) {
         jobAdvertisementService.add(request);
 }
 

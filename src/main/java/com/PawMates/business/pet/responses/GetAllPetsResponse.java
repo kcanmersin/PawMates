@@ -17,8 +17,6 @@ public class GetAllPetsResponse {
     private String breed;
     private String age;
     private String gender; // 'M' veya 'F' olarak kalır
-    private Long advertisementId;
-
-    // Pet'in resimlerini içeren Base64 kodlanmış stringlerin listesi
-    private List<String> petImages; // Pet'in tüm resimlerini döndürmek için eklendi
+    //private Long advertisementId;
+    private List<String> petImages; // Base64 kodlanmış resimlerin listesi
 }

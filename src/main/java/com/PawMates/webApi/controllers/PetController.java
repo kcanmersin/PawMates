@@ -29,9 +29,10 @@ public class PetController {
         return petService.getById(id);
     }
 
-    @PostMapping(consumes = "multipart/form-data")
+//    @PostMapping(consumes = "multipart/form-data")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public void add(@ModelAttribute @Valid CreatePetRequest createPetRequest) {
+    public void add(@RequestBody @Valid CreatePetRequest createPetRequest) {
         petService.add(createPetRequest);
     }
 

@@ -63,36 +63,36 @@ public class UserManager implements UserService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public GetUserByIdResponse getUserById(Long id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found!"));
-        return modelMapperService.forResponse().map(user, GetUserByIdResponse.class);
+//    @Override
+//    public GetUserByIdResponse getUserById(Long id) {
+//        User user = userRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("User not found!"));
+//        return modelMapperService.forResponse().map(user, GetUserByIdResponse.class);
+//
+//    }
+public GetUserByIdResponse getUserById(Long userId) {
+    Optional<User> userOptional = userRepository.findById(userId);
 
+    User user = userOptional.get();
+    GetUserByIdResponse response = new GetUserByIdResponse();
+    response.setId(user.getId());
+    response.setUsername(user.getUsername());
+    response.setEmail(user.getEmail());
+    response.setFirstName(user.getFirstName());
+    response.setLastName(user.getLastName());
+
+    if (user.getProfilePicture() != null) {
+        String profilePictureBase64 = Base64.getEncoder().encodeToString(user.getProfilePicture());
+        response.setProfilePicture("data:image/jpeg;base64," + profilePictureBase64);
     }
-//public GetUserByIdResponse getUserById(Long userId) {
-//    Optional<User> userOptional = userRepository.findById(userId);
-//
-//    User user = userOptional.get();
-//    GetUserByIdResponse response = new GetUserByIdResponse();
-//    response.setId(user.getId());
-//    response.setUsername(user.getUsername());
-//    response.setEmail(user.getEmail());
-//    response.setFirstName(user.getFirstName());
-//    response.setLastName(user.getLastName());
-//
-//    if (user.getProfilePicture() != null) {
-//        String profilePictureBase64 = Base64.getEncoder().encodeToString(user.getProfilePicture());
-//        response.setProfilePicture("data:image/jpeg;base64," + profilePictureBase64);
-//    }
-//
-//    if (user.getBackgroundPicture() != null) {
-//        String backgroundPictureBase64 = Base64.getEncoder().encodeToString(user.getBackgroundPicture());
-//        response.setBackgroundPicture("data:image/jpeg;base64," + backgroundPictureBase64);
-//    }
-//
-//    return response;
-//}
+
+    if (user.getBackgroundPicture() != null) {
+        String backgroundPictureBase64 = Base64.getEncoder().encodeToString(user.getBackgroundPicture());
+        response.setBackgroundPicture("data:image/jpeg;base64," + backgroundPictureBase64);
+    }
+
+    return response;
+}
     @Override
     public GetUserByUsernameResponse getUserByUsername(String username) {
         User user = userRepository.findByUsername(username)
