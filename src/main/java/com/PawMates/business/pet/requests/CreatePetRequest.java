@@ -1,14 +1,10 @@
 package com.PawMates.business.pet.requests;
 
-import com.PawMates.entities.concretes.PetImage;
-import org.springframework.web.multipart.MultipartFile;
+import jakarta.annotation.Nullable;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,6 +26,7 @@ public class CreatePetRequest {
     @Size(min = 1, max = 1, message = "Gender must be 'M' or 'F'")
     private String gender;
 
+    @Nullable
     private Long advertisementId;
     // MultipartFile tipinde bir veya birden fazla resim ekleyin
    // private MultipartFile[] petImages; // Birden fazla resim desteklemek için MultipartFile dizisi

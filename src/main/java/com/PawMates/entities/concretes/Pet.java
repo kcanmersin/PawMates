@@ -37,16 +37,9 @@ public class Pet {
     @Column(name = "gender")
     private String gender;
 
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "advertisement_id") // Bu sütun Pet ile Advertisement arasındaki ilişkiyi belirtir
     private Advertisement advertisement; // Bu Pet'in ait olduğu İlan
 
-//
-//    @Lob
-//    @Column(name = "pet_images")
-//    private byte[] pet_images;
-
-   @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
-   //private Set<PetImage> petImages = new HashSet<>();
-   private List<PetImage> petImages ;
 }

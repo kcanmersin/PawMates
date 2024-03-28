@@ -49,5 +49,6 @@ public class Advertisement {
     @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     //private List<Pet> pets; // İlan ile ilişkili evcil hayvanların listesi
     private List<Pet> pets; // İlan ile ilişkili evcil hayvanların listesi
-
+    @OneToMany(mappedBy = "advertisement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Image> images;
 }

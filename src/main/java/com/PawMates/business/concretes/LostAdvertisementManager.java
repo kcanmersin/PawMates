@@ -8,11 +8,14 @@ import com.PawMates.business.pet.requests.CreatePetRequest;
 import com.PawMates.core.utilities.mappers.ModelMapperService;
 import com.PawMates.dataAccess.abstracts.LostAdvertisementRepository;
 import com.PawMates.dataAccess.abstracts.PetRepository;
+import com.PawMates.entities.concretes.Image;
 import com.PawMates.entities.concretes.LostAdvertisement;
 import com.PawMates.entities.concretes.Pet;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,14 +42,13 @@ public class LostAdvertisementManager implements LostAdvertisementService {
     }
 
     @Override
-    public void add(CreateLostAdvertisementRequest request) {
+    public void add(CreateLostAdvertisementRequest request, MultipartFile[] images) throws IOException {
         // Map the request to a LostAdvertisement entity
         LostAdvertisement advertisement = modelMapperService.forRequest().map(request, LostAdvertisement.class);
-
         // Initialize the pets list for the advertisement to ensure it's not null
         advertisement.setPets(new ArrayList<>());
 
-        // Check if there are pet requests to process
+        // Process pets from the request
         if (request.getPets() != null && !request.getPets().isEmpty()) {
             for (CreatePetRequest petRequest : request.getPets()) {
                 // Map each CreatePetRequest to a Pet entity
@@ -56,9 +58,26 @@ public class LostAdvertisementManager implements LostAdvertisementService {
             }
         }
 
-        // Now that both sides of the relationship are properly established, save the advertisement
+        // Assuming images are to be associated with the advertisement directly
+        if (images != null && images.length > 0) {
+            List<Image> advertisementImages = new ArrayList<>();
+            for (MultipartFile file : images) {
+                // Here you should implement the logic to store the images and create Image entities
+                // For example, you might store the images on disk or in a blob store, and save their paths in the database
+                Image image = new Image();
+                image.setFileName(file.getOriginalFilename());
+                image.setFileType(file.getContentType());
+                image.setData(file.getBytes()); // Store the image bytes; consider storing just a reference/path instead
+                image.setAdvertisement(advertisement); // Associate the image with the advertisement
+                advertisementImages.add(image);
+            }
+            advertisement.setImages(advertisementImages); // Set the images for the advertisement
+        }
+
+        // Save the advertisement, which now includes pets and images
         lostAdvertisementRepository.save(advertisement);
     }
+
 
 
 
